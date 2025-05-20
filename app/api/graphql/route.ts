@@ -1,7 +1,6 @@
 import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { gql } from "graphql-tag";
-import type { NextRequest } from "next/server";
 import { PrismaClient, User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
@@ -111,5 +110,10 @@ const server = new ApolloServer({
   resolvers,
 });
 
-const handler = startServerAndCreateNextHandler<NextRequest>(server);
-export { handler as GET, handler as POST };
+const handler = startServerAndCreateNextHandler(server);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const GET = (request: Request, context: any) =>
+  handler(request, context);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const POST = (request: Request, context: any) =>
+  handler(request, context);
