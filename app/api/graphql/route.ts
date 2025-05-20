@@ -2,7 +2,7 @@ import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { gql } from "graphql-tag";
 import type { NextRequest } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 
@@ -47,9 +47,12 @@ const resolvers = {
     hello: () => "Hola desde GraphQL 👋",
   },
   Mutation: {
-    registerUser: async (_: any, { input }: any) => {
+    registerUser: async (
+      _: unknown,
+      args: { input: { name: string; email: string; password: string } }
+    ) => {
       try {
-        const { name, email, password } = registerSchema.parse(input);
+        const { name, email, password } = registerSchema.parse(args.input);
 
         const existingUser = await prisma.user.findUnique({ where: { email } });
         if (existingUser) {
@@ -78,10 +81,13 @@ const resolvers = {
         throw error;
       }
     },
-    loginUser: async (_: any, { input }: any) => {
-      const { email, password } = input;
+    loginUser: async (
+      _: unknown,
+      args: { input: { email: string; password: string } }
+    ) => {
+      const { email, password } = args.input;
 
-      const user = await prisma.user.findUnique({ where: { email } });
+      const user = (await prisma.user.findUnique({ where: { email } })) as User;
       if (!user) {
         throw new Error("Credenciales inválidas");
       }
