@@ -78,7 +78,7 @@ const Header = ({ user }: { user: User | null }) => {
                 <li>
                   <Link
                     href="/registrarse"
-                    className="text-[#af3e06] text-lg py-[5px] px-[20px] bg-[#fff] rounded-md focus:outline-none transition-all duration-500"
+                    className="text-white text-lg py-[5px] px-[20px] font-semibold bg-[#bad613] hover:bg-[#d3f02a] rounded-md focus:outline-none transition-all duration-500"
                   >
                     Registrarse
                   </Link>
@@ -180,7 +180,7 @@ const Header = ({ user }: { user: User | null }) => {
                     onClick={toggleMobileMenu}
                   >
                     <Link
-                      className="inline-block no-underline p-[10px_0] text-2xl text-white w-auto px-5 py-1 bg-[#af3e06] mt-3 rounded-md"
+                      className="inline-block no-underline p-[10px_0] text-2xl text-white w-auto px-5 py-1 font-semibold bg-[#bad613] mt-3 rounded-md"
                       href="/registrarse"
                     >
                       Registrarse

@@ -48,7 +48,7 @@ export default function Ingresar() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white px-4 py-12">
+    <div className="min-h-[calc(100vh-60px)] flex items-center justify-center bg-white px-4 py-12">
       <div className="w-full max-w-md bg-[#CC4C0D] text-white p-8 rounded shadow-md">
         <h1 className="text-3xl font-bold mb-6 text-center">Ingresar</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
